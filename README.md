@@ -8,6 +8,7 @@ Leverage the power of Dapr to build microservices on Azure
 - Helm 3.0
 - MongoDB
 - Redis
+- Docker
 
 ### Setup
 TBD
