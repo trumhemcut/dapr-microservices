@@ -1,27 +1,5 @@
 <template lang="html">
   <div>
-    <div class="centerx">
-      <vs-navbar
-        :color="colorx"
-        text-color="rgba(255,255,255,.6)"
-        class="myNavbar"
-      >
-        <div slot="title">
-          <vs-navbar-title>
-            SimplAds - a sample using Dapr on Microsoft Azure
-          </vs-navbar-title>
-        </div>
-
-        <vs-navbar-item index="0">
-          <a href="#">john.doe@email.com</a>
-        </vs-navbar-item>
-        <vs-navbar-item index="2">
-          <a href="#">Logout</a>
-        </vs-navbar-item>
-
-        <vs-spacer></vs-spacer>
-      </vs-navbar>
-    </div>
     <vs-navbar v-model="activeItem" class="nabarx">
       <div slot="title">
         <vs-navbar-title class="table-header">
@@ -30,10 +8,10 @@
       </div>
 
       <vs-navbar-item index="0">
-        <a href="#">Create new advertisement</a>
+        <router-link to="/create-new-ads">Create new advertisement</router-link>
       </vs-navbar-item>
     </vs-navbar>
-    <vs-table stripe :data="users">
+    <vs-table stripe :data="advertisements">
       <template slot="thead">
         <vs-th>Title</vs-th>
         <vs-th>Category</vs-th>
@@ -70,69 +48,59 @@
         </vs-tr>
       </template>
     </vs-table>
+    <div class="centerx">
+      <vs-popup
+        classContent="popup"
+        title="Lorem ipsum dolor sit amet"
+        :active.sync="popupActivo"
+      >
+        <vs-input class="inputx" placeholder="Placeholder" v-model="value1" />
+        <vs-input
+          disabled
+          class="inputx"
+          placeholder="Disabled"
+          v-model="value2"
+        />
+
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+          eiusmod tempor incididunt ut
+        </p>
+        <vs-select label="Figuras" v-model="select1">
+          <vs-select-item
+            :key="index"
+            :value="item.value"
+            :text="item.text"
+            v-for="(item, index) in options1"
+          />
+        </vs-select>
+      </vs-popup>
+    </div>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
+
 export default {
   data: () => ({
-    colorx: "#000000",
-    users: [
-      {
-        id: 1,
-        title: "Lemon Juice",
-        category: "Drink",
-        price: "500$",
-        image: "lemonjuice.jpg",
-        status: "Active",
-        postedBy: "john.doe@email.com",
-        postedDate: "July 9, 2019"
-      },
-      {
-        id: 2,
-        title: "Coca Cola",
-        category: "Drink",
-        price: "1k$",
-        image: "cocacola.jpg",
-        status: "Active",
-        postedBy: "john.doe@email.com",
-        postedDate: "July 9, 2019"
-      },
-      {
-        id: 3,
-        title: "Lemon Juice",
-        category: "Drink",
-        price: "500$",
-        image: "hildegard.org",
-        status: "Pending",
-        postedBy: "john.doe@email.com",
-        postedDate: "July 9, 2019"
-      },
-      {
-        id: 4,
-        title: "Pencil",
-        category: "Pen & Pencil",
-        price: "2000$",
-        image: "pencil.jpg",
-        status: "Pending",
-        postedBy: "john.doe@email.com",
-        postedDate: "July 9, 2019"
-      },
-      {
-        id: 5,
-        title: "Chewing Gum",
-        category: "Drink",
-        price: "20$",
-        image: "chewing-gum.jpg",
-        status: "Active",
-        postedBy: "john.doe@email.com",
-        postedDate: "July 9, 2019"
-      }
-    ]
-  })
+    select1: 3,
+    options1: [
+      { text: "IT", value: 0 },
+      { text: "Blade Runner", value: 2 },
+      { text: "Thor Ragnarok", value: 3 }
+    ],
+    value1: "",
+    value2: "",
+    popupActivo2: false,
+    popupActivo3: false
+  }),
+  computed: {
+    ...mapState(["advertisements"])
+  }
 };
 </script>
-<style lang="stylus">
+<style lang="stylus" scoped>
 .table-header
   font-family "Montserrat", sans-serif
   font-weight 400

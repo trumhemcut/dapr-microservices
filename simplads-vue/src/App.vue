@@ -1,5 +1,27 @@
 <template>
   <div id="app">
+    <div class="centerx">
+      <vs-navbar
+        color="#000000"
+        text-color="rgba(255,255,255,.6)"
+        class="myNavbar"
+      >
+        <div slot="title">
+          <vs-navbar-title>
+            SimplAds - a sample using Dapr on Microsoft Azure
+          </vs-navbar-title>
+        </div>
+
+        <vs-navbar-item index="0">
+          <a href="#">john.doe@email.com</a>
+        </vs-navbar-item>
+        <vs-navbar-item index="2">
+          <a href="#">Logout</a>
+        </vs-navbar-item>
+
+        <vs-spacer></vs-spacer>
+      </vs-navbar>
+    </div>
     <!-- <div id="nav">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link>
