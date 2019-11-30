@@ -1,0 +1,42 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: simplads-vue
+  labels:
+    app: simplads-vue
+spec:
+  selector:
+    app: simplads-vue
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+  type: LoadBalancer
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simplads-vue
+  labels:
+    app: simplads-vue
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: simplads-vue
+  template:
+    metadata:
+      labels:
+        app: simplads-vue
+      # annotations:
+      #   dapr.io/enabled: "true"
+      #   dapr.io/id: "simplads-vue"
+      #   dapr.io/port: "3000"
+    spec:
+      containers:
+        - name: simplads-vue
+          image: simplads-vue
+          ports:
+            - containerPort: 8080
+          imagePullPolicy: IfNotPresent
