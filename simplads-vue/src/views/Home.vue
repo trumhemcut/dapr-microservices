@@ -80,7 +80,7 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
   data: () => ({
@@ -95,8 +95,15 @@ export default {
     popupActivo2: false,
     popupActivo3: false
   }),
+  mounted() {
+    console.log("hehehe");
+    this.getAds();
+  },
   computed: {
     ...mapState(["advertisements"])
+  },
+  methods: {
+    ...mapActions(["getAds"])
   }
 };
 </script>

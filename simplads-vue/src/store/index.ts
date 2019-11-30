@@ -1,7 +1,7 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-
-Vue.use(Vuex)
+import Vue from "vue";
+import Vuex from "vuex";
+import { Ads } from "../api/ads";
+Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
@@ -59,9 +59,16 @@ export default new Vuex.Store({
     ]
   },
   mutations: {
+    async setAdsList(state, adsList) {
+      state.advertisements = adsList;
+    }
   },
   actions: {
+    async getAds({ commit }) {
+      console.log("hahaha");
+      const adsList = await new Ads().getAllAds();
+      commit("setAdsList", adsList);
+    }
   },
-  modules: {
-  }
-})
+  modules: {}
+});
