@@ -112,9 +112,11 @@ export default {
     ...mapActions(["createNewAds"]),
     async saveAds() {
       await this.createNewAds({
-        id: 1,
         title: this.title,
-        category: this.selectedCategory,
+        categoryId: this.selectedCategory,
+        category: this.categories.filter(
+          c => c.value == this.selectedCategory
+        )[0].text,
         price: this.price,
         image: "",
         status: "Pending",
