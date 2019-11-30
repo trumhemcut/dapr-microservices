@@ -1,6 +1,6 @@
 <template lang="html">
   <div>
-    <vs-navbar v-model="activeItem" class="nabarx">
+    <vs-navbar class="nabarx">
       <div slot="title">
         <vs-navbar-title class="table-header">
           List of advertisements
@@ -48,34 +48,6 @@
         </vs-tr>
       </template>
     </vs-table>
-    <div class="centerx">
-      <vs-popup
-        classContent="popup"
-        title="Lorem ipsum dolor sit amet"
-        :active.sync="popupActivo"
-      >
-        <vs-input class="inputx" placeholder="Placeholder" v-model="value1" />
-        <vs-input
-          disabled
-          class="inputx"
-          placeholder="Disabled"
-          v-model="value2"
-        />
-
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-          eiusmod tempor incididunt ut
-        </p>
-        <vs-select label="Figuras" v-model="select1">
-          <vs-select-item
-            :key="index"
-            :value="item.value"
-            :text="item.text"
-            v-for="(item, index) in options1"
-          />
-        </vs-select>
-      </vs-popup>
-    </div>
   </div>
 </template>
 
@@ -89,14 +61,9 @@ export default {
       { text: "IT", value: 0 },
       { text: "Blade Runner", value: 2 },
       { text: "Thor Ragnarok", value: 3 }
-    ],
-    value1: "",
-    value2: "",
-    popupActivo2: false,
-    popupActivo3: false
+    ]
   }),
   mounted() {
-    console.log("hehehe");
     this.getAds();
   },
   computed: {

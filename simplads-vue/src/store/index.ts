@@ -59,15 +59,21 @@ export default new Vuex.Store({
     ]
   },
   mutations: {
-    async setAdsList(state, adsList) {
+    setAdsList(state, adsList) {
       state.advertisements = adsList;
+    },
+    addNewAds(state, newAds) {
+      state.advertisements.push(newAds);
     }
   },
   actions: {
     async getAds({ commit }) {
-      console.log("hahaha");
       const adsList = await new Ads().getAllAds();
       commit("setAdsList", adsList);
+    },
+    async createNewAds({ commit }, ads) {
+      await new Ads().createNewAds(ads);
+      commit("addNewAds", ads);
     }
   },
   modules: {}

@@ -54,9 +54,7 @@
       <vs-col vs-type="flex" vs-w="12">
         <vs-row>
           <vs-col vs-w="2"><span>Status</span></vs-col>
-          <vs-col vs-w="10"
-            ><vs-input class="inputx" size="default" v-model="value1"
-          /></vs-col>
+          <vs-col vs-w="10"><vs-input class="inputx" size="default"/></vs-col>
         </vs-row>
       </vs-col>
       <vs-col vs-type="flex" vs-w="12">
@@ -81,7 +79,9 @@
         <vs-row>
           <vs-col vs-w="2"></vs-col>
           <vs-col vs-w="10"
-            ><vs-button size="large">Save Ads</vs-button></vs-col
+            ><vs-button size="large" @click="saveAds"
+              >Save Ads</vs-button
+            ></vs-col
           >
         </vs-row>
       </vs-col>
@@ -91,12 +91,12 @@
 
 <script>
 import "material-icons/iconfont/material-icons.css";
-import { mapState } from "vuex";
+import { mapState, mapActions } from "vuex";
 
 export default {
   data: () => ({
     title: "",
-    price: "",
+    price: undefined,
     description: "",
     selectedCategory: 2,
     categories: [
@@ -107,6 +107,21 @@ export default {
   }),
   computed: {
     ...mapState(["advertisements"])
+  },
+  methods: {
+    ...mapActions(["createNewAds"]),
+    async saveAds() {
+      await this.createNewAds({
+        id: 1,
+        title: this.title,
+        category: this.selectedCategory,
+        price: this.price,
+        image: "",
+        status: "Pending",
+        postedBy: "john.doe@email.com",
+        postedDate: Date.now()
+      });
+    }
   }
 };
 </script>
