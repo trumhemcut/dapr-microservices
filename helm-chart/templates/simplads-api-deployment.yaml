@@ -27,6 +27,12 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.simplads_api.repository }}:{{ .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.simplads_api.pullPolicy }}
+          env:
+          - name: MONGODB
+            valueFrom:
+              configMapKeyRef:
+                name: simplads-api
+                key: mongodb
           ports:
             - name: http
               containerPort: 8081

@@ -11,7 +11,11 @@ image:
   simplads_vue:
     repository: simplads_vue
     pullPolicy: IfNotPresent
-    
+
+configmap:
+  simplads_api:
+    mongodb: mongodb  
+
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
