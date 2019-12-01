@@ -11,7 +11,8 @@ class App {
   public userRoutes: UserRoute = new UserRoute();
   public orderRoutes: OrderRoute = new OrderRoute();
   public adRoutes: AdvertisementRoute = new AdvertisementRoute();
-  public mongoUrl: string = "mongodb://mongodb/adsdb";
+  public mongoUrl: string = `mongodb://${process.env.MONGODB ||
+    "localhost"}/adsdb`;
 
   constructor() {
     this.app = express();
@@ -20,6 +21,7 @@ class App {
     this.userRoutes.routes(this.app);
     this.orderRoutes.routes(this.app);
     this.adRoutes.routes(this.app);
+    console.info(`Connecting to mongo server at ${this.mongoUrl} ...`);
     this.mongoSetup();
   }
 
