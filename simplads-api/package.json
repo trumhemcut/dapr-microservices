@@ -12,7 +12,7 @@
     "test": "cross-env NODE_ENV=test mocha -r ts-node/register ./test/**/*.spec.ts ",
     "test:mutation": "stryker run",
     "stryker:init": "stryker init",
-    "dev": "cross-env PORT=3000 NODE_ENV=dev nodemon --inspect ./src/server.ts",
+    "dev": "cross-env PORT=8081 NODE_ENV=dev nodemon --inspect ./src/server.ts",
     "prod": "PORT=3000 npm run build && npm run start",
     "tsc": "tsc"
   },
