@@ -11,7 +11,7 @@ class App {
   public userRoutes: UserRoute = new UserRoute();
   public orderRoutes: OrderRoute = new OrderRoute();
   public adRoutes: AdvertisementRoute = new AdvertisementRoute();
-  public mongoUrl: string = "mongodb://localhost/adsdb";
+  public mongoUrl: string = "mongodb://mongodb/adsdb";
 
   constructor() {
     this.app = express();
