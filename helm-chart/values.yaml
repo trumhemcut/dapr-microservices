@@ -14,7 +14,7 @@ image:
 
 configmap:
   simplads_api:
-    mongodb: mongodb  
+    mongodb: simplads-mongodb  
 
 imagePullSecrets: []
 nameOverride: ""
@@ -76,3 +76,9 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+subcharts:
+  enabled: true
+
+mongodb:
+  usePassword: false

@@ -3,16 +3,16 @@ kind: Deployment
 metadata:
   name: {{ include "simplads-chart.fullname" . }}-vue
   labels:
-    {{- include "simplads-chart.labels" . | nindent 4 }}
+    {{- include "simplads-chart.labels" . | nindent 4 }}-vue
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{- include "simplads-chart.selectorLabels" . | nindent 6 }}
+      {{- include "simplads-chart.selectorLabels" . | nindent 6 }}-vue
   template:
     metadata:
       labels:
-        {{- include "simplads-chart.selectorLabels" . | nindent 8 }}
+        {{- include "simplads-chart.selectorLabels" . | nindent 8 }}-vue
     spec:
     {{- with .Values.imagePullSecrets }}
       imagePullSecrets:

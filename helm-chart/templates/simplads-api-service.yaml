@@ -3,7 +3,7 @@ kind: Service
 metadata:
   name: {{ include "simplads-chart.fullname" . }}-api
   labels:
-    {{- include "simplads-chart.labels" . | nindent 4 }}
+    {{- include "simplads-chart.labels" . | nindent 4 }}-api
 spec:
   type: {{ .Values.service.simplads_api.type }}
   ports:
@@ -12,4 +12,4 @@ spec:
       protocol: TCP
       name: http
   selector:
-    {{- include "simplads-chart.selectorLabels" . | nindent 4 }}
+    {{- include "simplads-chart.selectorLabels" . | nindent 4 }}-api
