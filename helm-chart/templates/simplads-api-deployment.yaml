@@ -3,16 +3,16 @@ kind: Deployment
 metadata:
   name: {{ include "simplads-chart.fullname" . }}-api
   labels:
-    {{- include "simplads-chart.labels" . | nindent 4 }}
+    {{- include "simplads-chart.labels" . | nindent 4 }}-api
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{- include "simplads-chart.selectorLabels" . | nindent 6 }}
+      {{- include "simplads-chart.selectorLabels" . | nindent 6 }}-api
   template:
     metadata:
       labels:
-        {{- include "simplads-chart.selectorLabels" . | nindent 8 }}
+        {{- include "simplads-chart.selectorLabels" . | nindent 8 }}-api
     spec:
     {{- with .Values.imagePullSecrets }}
       imagePullSecrets:

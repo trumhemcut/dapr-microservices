@@ -1,6 +1,6 @@
 apiVersion: v2
 name: simplads-chart
-description: A Helm chart for Kubernetes
+description: SimplAds - a sample app using Dapr on Azure
 
 # A chart can be either an 'application' or a 'library' chart.
 #
@@ -19,3 +19,9 @@ version: 0.1.0
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application.
 appVersion: 0.1.0
+
+dependencies:
+  - name: mongodb
+    version: 7.4.6
+    repository: https://kubernetes-charts.storage.googleapis.com
+    condition: subcharts.enabled

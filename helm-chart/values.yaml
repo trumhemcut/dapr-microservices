@@ -14,7 +14,7 @@ image:
 
 configmap:
   simplads_api:
-    mongodb: mongodb  
+    mongodb: simplads-mongodb  
 
 imagePullSecrets: []
 nameOverride: ""
@@ -45,6 +45,9 @@ service:
   simplads_vue:
     type: ClusterIP
     port: 8080
+  simplads_zipkin:
+    type: ClusterIP
+    port: 9411
 
 ingress:
   enabled: false
@@ -76,3 +79,9 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+subcharts:
+  enabled: true
+
+mongodb:
+  usePassword: false

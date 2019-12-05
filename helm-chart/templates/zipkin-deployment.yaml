@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "simplads-chart.fullname" . }}-vue
+  name: {{ .Release.Name }}-zipkin
   labels:
-    {{- include "simplads-chart.labels" . | nindent 4 }}-vue
+    {{- include "simplads-chart.labels" . | nindent 4 }}-zipkin
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{- include "simplads-chart.selectorLabels" . | nindent 6 }}-vue
+      {{- include "simplads-chart.selectorLabels" . | nindent 6 }}-zipkin
   template:
     metadata:
       labels:
-        {{- include "simplads-chart.selectorLabels" . | nindent 8 }}-vue
+        {{- include "simplads-chart.selectorLabels" . | nindent 8 }}-zipkin
     spec:
     {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
@@ -25,11 +25,11 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.simplads_vue.repository }}:{{ .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.simplads_vue.pullPolicy }}
+          image: "openzipkin/zipkin"
+          imagePullPolicy: IfNotPresent
           ports:
             - name: http
-              containerPort: 8080
+              containerPort: 9411
               protocol: TCP
           # livenessProbe:
           #   httpGet:
