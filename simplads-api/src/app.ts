@@ -7,7 +7,7 @@ import { UserRoute } from "./routes/user";
 import { AdvertisementRoute } from "./routes/advertisement";
 
 class App {
-  public app: express.Application;
+  public expressApp: express.Application;
   public userRoutes: UserRoute = new UserRoute();
   public orderRoutes: OrderRoute = new OrderRoute();
   public adRoutes: AdvertisementRoute = new AdvertisementRoute();
@@ -15,19 +15,29 @@ class App {
     "localhost"}/adsdb`;
 
   constructor() {
-    this.app = express();
-    this.app.use(bodyParser.json());
-    this.app.use(cors());
-    this.userRoutes.routes(this.app);
-    this.orderRoutes.routes(this.app);
-    this.adRoutes.routes(this.app);
-    console.info(`Connecting to mongo server at ${this.mongoUrl} ...`);
-    this.mongoSetup();
+    this.expressApp = express();
+    this.expressApp.use(bodyParser.json());
+    this.expressApp.use(cors());
+    this.userRoutes.routes(this.expressApp);
+    this.orderRoutes.routes(this.expressApp);
+    this.adRoutes.routes(this.expressApp);
   }
 
-  private mongoSetup() {
-    mongoose.connect(this.mongoUrl, { useNewUrlParser: true });
+  public async mongoSetup() {
+    try {
+      console.info(`Connecting to MongoDB server at ${this.mongoUrl} ...`);
+      await mongoose.connect(this.mongoUrl, { useNewUrlParser: true });
+    } catch (error) {
+      console.error(
+        `Failed to connect to MongoDB server at ${this.mongoUrl} - retry in 5 seconds.`,
+        error
+      );
+      console.log("");
+      setTimeout(() => {
+        this.mongoSetup();
+      }, 5000);
+    }
   }
 }
 
-export default new App().app;
+export default new App();
