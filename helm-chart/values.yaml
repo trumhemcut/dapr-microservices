@@ -6,10 +6,10 @@ replicaCount: 1
 
 image:
   simplads_api:
-    repository: simplads_api
+    repository: trumhemcut/simplads_api
     pullPolicy: IfNotPresent
   simplads_vue:
-    repository: simplads_vue
+    repository: trumhemcut/simplads_vue
     pullPolicy: IfNotPresent
 
 configmap:

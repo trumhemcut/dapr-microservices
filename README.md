@@ -2,6 +2,8 @@
 
 Leverage the power of Dapr to build microservices application
 
+![Build Status](https://github.com/trumhemcut/dapr-microservices/workflows/simplads-api/badge.svg)
+
 ## Get started
 
 ### Step 1 - Pre-requisites
