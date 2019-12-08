@@ -25,3 +25,7 @@ dependencies:
     version: 7.4.6
     repository: https://kubernetes-charts.storage.googleapis.com
     condition: subcharts.enabled
+  - name: traefik
+    version: 1.82.3
+    repository: https://kubernetes-charts.storage.googleapis.com
+    condition: subcharts.enabled

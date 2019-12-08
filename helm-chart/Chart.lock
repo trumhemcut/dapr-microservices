@@ -2,5 +2,8 @@ dependencies:
 - name: mongodb
   repository: https://kubernetes-charts.storage.googleapis.com
   version: 7.4.6
-digest: sha256:eb0adaa80b804a655cc4133ab92c605a7edadfec57da2bfa50e7a5bd217f81ad
-generated: "2019-12-02T11:23:18.219715+07:00"
+- name: traefik
+  repository: https://kubernetes-charts.storage.googleapis.com
+  version: 1.82.3
+digest: sha256:c27d91242d7fd00c526aab4a5ce2d9c888ecfb6b801b21adc629b624d23dc603
+generated: "2019-12-08T11:07:08.175713+07:00"
