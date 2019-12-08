@@ -65,6 +65,11 @@ ingress:
       paths:
         - serviceName: api
           servicePort: 8081
+    - host: zipkin.dapr.fun
+      paths:
+        - serviceName: zipkin
+          servicePort: 9411
+
   tls: []
   #  - secretName: chart-example-tls
   #    hosts:

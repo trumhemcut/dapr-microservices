@@ -13,6 +13,11 @@ spec:
     metadata:
       labels:
         {{- include "simplads-chart.selectorLabels" . | nindent 8 }}-api
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/id: {{ .Release.Name }}-api
+        dapr.io/port: "3000"
+        dapr.io/config: "tracing"
     spec:
     {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
