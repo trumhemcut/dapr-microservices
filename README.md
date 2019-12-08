@@ -1,6 +1,6 @@
-# dapr-on-azure
+# dapr-microservices
 
-Leverage the power of Dapr to build microservices on Azure
+Leverage the power of Dapr to build microservices application
 
 ## Get started
 
