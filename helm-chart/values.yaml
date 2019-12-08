@@ -15,8 +15,6 @@ image:
 configmap:
   simplads_api:
     mongodb: simplads-mongodb  
-  simplads_vue:
-    baseUrl: http://api.dapr.fun
 
 imagePullSecrets: []
 nameOverride: ""
@@ -63,8 +61,8 @@ ingress:
           servicePort: 8080
     - host: api.dapr.fun
       paths:
-        - serviceName: api
-          servicePort: 8081
+        - serviceName: api-dapr
+          servicePort: 80
     - host: zipkin.dapr.fun
       paths:
         - serviceName: zipkin

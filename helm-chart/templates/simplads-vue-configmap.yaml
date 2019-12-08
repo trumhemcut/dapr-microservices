@@ -3,4 +3,4 @@ kind: ConfigMap
 metadata:
   name: {{ .Release.Name }}-vue
 data:
-  baseUrl: {{ .Values.configmap.simplads_vue.baseUrl }}
+  baseUrl: {{ printf "http://api.dapr.fun/v1.0/invoke/%s-api/method/" .Release.Name }}
