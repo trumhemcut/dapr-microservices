@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "simplads-chart.fullname" . }}-api
+  name: {{ .Release.Name }}-api
   labels:
     {{- include "simplads-chart.labels" . | nindent 4 }}-api
 spec:
@@ -31,7 +31,7 @@ spec:
           - name: MONGODB
             valueFrom:
               configMapKeyRef:
-                name: simplads-api
+                name: {{ .Release.Name }}-api
                 key: mongodb
           ports:
             - name: http

@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "simplads-chart.fullname" . }}-vue
+  name: {{ .Release.Name }}-vue
   labels:
     {{- include "simplads-chart.labels" . | nindent 4 }}-vue
 spec:
@@ -27,6 +27,12 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.simplads_vue.repository }}:{{ .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.simplads_vue.pullPolicy }}
+          env:
+          - name: VUE_APP_BASE_URL
+            valueFrom:
+              configMapKeyRef:
+                name: simplads-vue
+                key: baseUrl
           ports:
             - name: http
               containerPort: 8080
