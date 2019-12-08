@@ -14,4 +14,4 @@ jobs:
         name: trumhemcut/simplads-api
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        dockerfile: simlads-api/Dockerfile
+        workdir: ./simplads-api
