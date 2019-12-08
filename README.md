@@ -1,6 +1,7 @@
 # dapr-microservices
 
 ![Build Status](https://github.com/trumhemcut/dapr-microservices/workflows/simplads-api/badge.svg) ![Build Status](https://github.com/trumhemcut/dapr-microservices/workflows/simplads-vue/badge.svg)
+
 Leverage the power of Dapr to build microservices application
 
 ## Get started
