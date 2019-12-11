@@ -8,9 +8,13 @@ Leverage the power of Dapr to build microservices application
 
 ### Step 1 - Pre-requisites
 
-- Kubernetes
-- Helm 3.0
-- Dapr CLI
+- Kubernetes, it's ok to use Kubernetes on Docker for Win/Mac or Minikube for development environment.
+- [Helm 3.0] (https://github.com/helm/helm/releases), no more Tiller. But please add the repo before we can install:
+```
+$ helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+$ helm repo update
+```
+- [Dapr CLI](https://github.com/dapr/cli), prefer latest version (e.g. 0.3.0)
 
 ### Step 2 - Setup
 
@@ -24,7 +28,7 @@ Next, clone the source code & install the SimplAds app.
 
 ```
 $ git clone https://github.com/trumhemcut/dapr-on-azure.git
-$ cd dapr-on-azure/helm-chart
+$ cd dapr-microservices/helm-chart
 $ helm dep up
 $ cd ..
 $ helm install simplads ./helm-chart
