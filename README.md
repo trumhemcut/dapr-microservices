@@ -52,7 +52,8 @@ After finishing all above steps (it may takes several minutes), you can browse f
 
 - Web App: http://web.dapr.fun
 - Distrubuted tracing: http://zipkin.dapr.fun
-- Traefik Ingress: http://dashboard.dapr.fun
+- Traefik Ingress: http://traefik.dapr.fun
+- Dapr Dashboard: http://dashboard.dapr.fun
 - Dapr API endpoint: http://api.dapr.fun
 
 ## Architecture
