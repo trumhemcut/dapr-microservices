@@ -1,0 +1,58 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: deployment-reader
+rules:
+- apiGroups: ["", "dapr.io", "apps", "extensions"]
+  resources: ["deployments", "pods", "pods/log", "components"]
+  verbs: ["get", "list"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: deployment-reader-global
+subjects:
+- kind: ServiceAccount
+  name: default
+  namespace: default
+roleRef:
+  kind: ClusterRole
+  name: deployment-reader
+  apiGroup: rbac.authorization.k8s.io
+---
+
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{ .Release.Name }}-dapr-dashboard
+spec:
+  selector:
+    app: {{ .Release.Name }}-dapr-dashboard
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-dapr-dashboard
+  labels:
+    app: {{ .Release.Name }}-dapr-dashboard
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-dapr-dashboard
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-dapr-dashboard
+    spec:
+      containers:
+      - name: {{ .Release.Name }}-dapr-dashboard
+        image: yaron2/daprdashboard
+        ports:
+        - containerPort: 8080
+        imagePullPolicy: Always
