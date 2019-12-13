@@ -1,4 +1,4 @@
-# dapr-microservices
+# dapr microservices
 
 ![Build Status](https://github.com/trumhemcut/dapr-microservices/workflows/simplads-api/badge.svg) ![Build Status](https://github.com/trumhemcut/dapr-microservices/workflows/simplads-vue/badge.svg)
 
@@ -28,11 +28,8 @@ Next, clone the source code & install the SimplAds app via Helm:
 
 ```
 $ git clone https://github.com/trumhemcut/dapr-microservices.git
-$ cd dapr-microservices/helm-chart
-# Install helm sub-chart dependencies
-$ helm dep up
-$ cd ..
-# Install SimplAds via Helm
+$ cd dapr-microservices
+$ helm dep up ./helm-chart
 $ helm install simplads ./helm-chart
 
 ```
