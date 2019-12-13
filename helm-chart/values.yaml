@@ -67,6 +67,10 @@ ingress:
       paths:
         - serviceName: zipkin
           servicePort: 9411
+    - host: dashboard.dapr.fun
+      paths:
+        - serviceName: dapr-dashboard
+          servicePort: 8080
 
   tls: []
   #  - secretName: chart-example-tls
@@ -102,4 +106,4 @@ mongodb:
 traefik:
   dashboard:
     enabled: true
-    domain: dashboard.dapr.fun
+    domain: traefik.dapr.fun

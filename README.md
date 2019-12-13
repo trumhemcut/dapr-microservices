@@ -10,10 +10,12 @@ Leverage the power of Dapr to build microservices application
 
 - Kubernetes, it's ok to use Kubernetes on Docker for Win/Mac or Minikube for development environment.
 - [Helm 3.0](https://github.com/helm/helm/releases), no more Tiller. But please add the repo before we can install:
+
 ```
 $ helm repo add stable https://kubernetes-charts.storage.googleapis.com/
 $ helm repo update
 ```
+
 - [Dapr CLI](https://github.com/dapr/cli), prefer latest version (e.g. 0.3.0)
 
 ### Step 2 - Setup
@@ -41,7 +43,7 @@ Since the SimplAds uses Traefik as its main ingress, and using hostnames as the 
 If you're using Mac, add the line below to this file _/etc/hosts_. If you're using Windows, add the line below to this file _C:\Windows\System32\drivers\hosts_
 
 ```
-127.0.0.1   dapr.fun dashboard.dapr.fun web.dapr.fun api.dapr.fun zipkin.dapr.fun
+127.0.0.1   dapr.fun dashboard.dapr.fun web.dapr.fun api.dapr.fun zipkin.dapr.fun traefik.dapr.fun
 ```
 
 ## Features
