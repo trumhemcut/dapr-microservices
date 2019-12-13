@@ -96,7 +96,9 @@ subcharts:
 
 mongodb:
   usePassword: false
-
+  # This is temporarily fix for Docker Desktop on Windows
+  persistence:
+    enabled: false
 traefik:
   dashboard:
     enabled: true
