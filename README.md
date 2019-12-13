@@ -18,28 +18,30 @@ $ helm repo update
 
 ### Step 2 - Setup
 
-First, initial the project using Dapr on Kubernetes:
+First, initialize Dapr on Kubernetes so that it can inject sidecars to our applications:
 
 ```
 $ dapr init --kubernetes
 ```
 
-Next, clone the source code & install the SimplAds app.
+Next, clone the source code & install the SimplAds app via Helm:
 
 ```
-$ git clone https://github.com/trumhemcut/dapr-on-azure.git
+$ git clone https://github.com/trumhemcut/dapr-microservices.git
 $ cd dapr-microservices/helm-chart
+# Install helm sub-chart dependencies
 $ helm dep up
 $ cd ..
+# Install SimplAds via Helm
 $ helm install simplads ./helm-chart
 
 ```
 
 ### Step 3 - Change your host file
 
-Since the SimplAds use Traefik as its main ingress, and using hostnames as the main endpoints. Please add those following hostnames to your host files:
+Since the SimplAds uses Traefik as its main ingress, and using hostnames as the main endpoints. Please add those following hostnames to your host files:
 
-If you're using Mac, add the line below to this file _/etc/hosts_
+If you're using Mac, add the line below to this file _/etc/hosts_. If you're using Windows, add the line below to this file _C:\Windows\System32\drivers\hosts_
 
 ```
 127.0.0.1   dapr.fun dashboard.dapr.fun web.dapr.fun api.dapr.fun zipkin.dapr.fun
