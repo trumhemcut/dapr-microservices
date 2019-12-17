@@ -25,7 +25,7 @@ spec:
         - name: {{ .Chart.Name }}
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.simplads_vue.repository }}:{{ .Chart.AppVersion }}"
+          image: "{{ .Values.image.simplads_vue.repository }}:latest"
           imagePullPolicy: {{ .Values.image.simplads_vue.pullPolicy }}
           env:
           - name: VUE_APP_BASE_URL
