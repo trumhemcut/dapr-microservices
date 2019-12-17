@@ -1,7 +1,7 @@
-'use strict'
+"use strict";
 
 export enum OrderStatus {
-    Placed = 'PLACED',
-    Approved = 'APPROVED',
-    Delivered = 'DELIVERED'
+  Placed = "PLACED",
+  Approved = "APPROVED",
+  Delivered = "DELIVERED"
 }
