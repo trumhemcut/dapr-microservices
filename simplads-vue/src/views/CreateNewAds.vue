@@ -69,9 +69,7 @@
         <vs-row>
           <vs-col vs-w="2"><span>Image</span></vs-col>
           <vs-col vs-w="10"
-            ><vs-upload
-              action="https://jsonplaceholder.typicode.com/posts/"
-              limit="1"
+            ><input id="image" type="file" @change="fileChanged"
           /></vs-col>
         </vs-row>
       </vs-col>
@@ -103,13 +101,19 @@ export default {
       { text: "Drinks and foods", value: 0 },
       { text: "Computers", value: 2 },
       { text: "Thor Ragnarok", value: 3 }
-    ]
+    ],
+    uploadImage: undefined
   }),
   computed: {
     ...mapState(["advertisements"])
   },
   methods: {
     ...mapActions(["createNewAds"]),
+    async fileChanged(event) {
+      if (event.target.files.length >= 1) {
+        this.uploadImage = event.target.files[0];
+      }
+    },
     async saveAds() {
       await this.createNewAds({
         title: this.title,
@@ -118,7 +122,7 @@ export default {
           c => c.value == this.selectedCategory
         )[0].text,
         price: this.price,
-        image: "",
+        image: this.uploadImage,
         status: "Pending",
         postedBy: "john.doe@email.com",
         postedDate: Date.now()

@@ -12,6 +12,15 @@ export class Ads {
   }
   async createNewAds(newAds: Advertisement) {
     console.log("create new ads");
-    await axios.post("/advertisements", newAds);
+    const formData = new FormData();
+    formData.append("title", newAds.title);
+    formData.append("category", newAds.category);
+    formData.append("file", newAds.image);
+    formData.append("image", "");
+    formData.append("postedBy", newAds.postedBy);
+    formData.append("postedDate", newAds.postedDate.toString());
+    formData.append("price", newAds.price);
+    formData.append("status", newAds.status);
+    await axios.post("/advertisements", formData);
   }
 }
