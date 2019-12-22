@@ -2,3 +2,4 @@ simplads-vue/node_modules
 simplads-api/node_modules
 simplads-api/uploads
 helm-chart/charts
+.DS_Store

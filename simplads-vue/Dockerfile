@@ -1,10 +1,12 @@
-FROM node:12
+FROM node:12.14.0-alpine3.11
+
+RUN apk add --no-cache --update build-base python2
 
 WORKDIR /usr/src/app
 
 COPY package*.json ./
-RUN npm install
+RUN yarn
 
 COPY . .
 
-CMD [ "npm", "run", "serve" ]
+CMD [ "yarn", "serve" ]

@@ -11,5 +11,9 @@ spec:
       targetPort: http
       protocol: TCP
       name: http
+    - port: 3500
+      targetPort: http
+      protocol: TCP
+      name: dapr
   selector:
     {{- include "simplads-chart.selectorLabels" . | nindent 4 }}-api

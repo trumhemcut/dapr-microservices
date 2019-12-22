@@ -40,7 +40,7 @@ securityContext: {}
 
 service:
   simplads_api:
-    type: ClusterIP
+    type: LoadBalancer
     port: 8081
   simplads_vue:
     type: ClusterIP
@@ -103,7 +103,10 @@ mongodb:
   # This is temporarily fix for Docker Desktop on Windows
   persistence:
     enabled: false
+  service:
+    type: LoadBalancer
 traefik:
   dashboard:
     enabled: true
     domain: traefik.dapr.fun
+    
