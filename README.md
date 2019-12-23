@@ -1,6 +1,8 @@
 # dapr microservices
 
 ![Build Status](https://github.com/trumhemcut/dapr-microservices/workflows/simplads-api/badge.svg) ![Build Status](https://github.com/trumhemcut/dapr-microservices/workflows/simplads-vue/badge.svg)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Follow on Twitter](https://img.shields.io/twitter/follow/trumhemcut.svg?style=social&logo=twitter)](https://twitter.com/intent/follow?screen_name=trumhemcut)
 
 Leverage the power of Dapr to build microservices application
 
