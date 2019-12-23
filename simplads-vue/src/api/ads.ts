@@ -10,17 +10,18 @@ export class Ads {
     console.log("data" + result.data);
     return result.data;
   }
-  async createNewAds(newAds: Advertisement) {
-    console.log("create new ads");
+  async createNewAds(data: any) {
+    console.log("create new ads...");
+    await axios.post("/advertisements", data.newAds);
+  }
+  async uploadAds(data: any) {
+    console.log("upload ads image ...");
+    // TODO: this is temporarily fix while waiting for Dapr reply
+    axios.defaults.baseURL = process.env.VUE_APP_BASE_URL_WITHOUT_DAPR;
+
     const formData = new FormData();
-    formData.append("title", newAds.title);
-    formData.append("category", newAds.category);
-    formData.append("file", newAds.image);
-    formData.append("image", "");
-    formData.append("postedBy", newAds.postedBy);
-    formData.append("postedDate", newAds.postedDate.toString());
-    formData.append("price", newAds.price);
-    formData.append("status", newAds.status);
-    await axios.post("/advertisements", formData);
+    formData.append("file", data.uploadImage);
+
+    await axios.post("/upload", formData);
   }
 }

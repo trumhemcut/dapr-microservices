@@ -1,5 +1,7 @@
 simplads-vue/node_modules
+simplads-vue/package-lock.json
 simplads-api/node_modules
+simplads-api/package-lock.json
 simplads-api/uploads
 helm-chart/charts
 .DS_Store

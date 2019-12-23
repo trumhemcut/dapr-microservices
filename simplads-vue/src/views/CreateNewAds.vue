@@ -13,6 +13,14 @@
     </vs-navbar>
     <vs-row style="padding-top:20px;padding-left:10px;" vs-w="6">
       <vs-col vs-type="flex" vs-w="12">
+        <vs-alert
+         :active.sync="NewAdsCreated"
+        closable
+        close-icon="cancel">
+          Created new ads successfully!
+        </vs-alert>
+      </vs-col>
+      <vs-col vs-type="flex" vs-w="12">
         <vs-row>
           <vs-col vs-w="2"><span>Title</span></vs-col>
           <vs-col vs-w="10"
@@ -54,7 +62,7 @@
       <vs-col vs-type="flex" vs-w="12">
         <vs-row>
           <vs-col vs-w="2"><span>Status</span></vs-col>
-          <vs-col vs-w="10"><vs-input class="inputx" size="default"/></vs-col>
+          <vs-col vs-w="10"><vs-input disabled  class="inputx" size="default" v-model="state"/></vs-col>
         </vs-row>
       </vs-col>
       <vs-col vs-type="flex" vs-w="12">
@@ -102,7 +110,9 @@ export default {
       { text: "Computers", value: 2 },
       { text: "Thor Ragnarok", value: 3 }
     ],
-    uploadImage: undefined
+    state: "PENDING",
+    uploadImage: undefined,
+    NewAdsCreated: false
   }),
   computed: {
     ...mapState(["advertisements"])
@@ -116,17 +126,20 @@ export default {
     },
     async saveAds() {
       await this.createNewAds({
-        title: this.title,
-        categoryId: this.selectedCategory,
-        category: this.categories.filter(
-          c => c.value == this.selectedCategory
-        )[0].text,
-        price: this.price,
-        image: this.uploadImage,
-        status: "Pending",
-        postedBy: "john.doe@email.com",
-        postedDate: Date.now()
-      });
+        newAds: {
+          title: this.title,
+          categoryId: this.selectedCategory,
+          category: this.categories.filter(
+            c => c.value == this.selectedCategory
+          )[0].text,
+          price: this.price,
+          status: "Pending",
+          postedBy: "john.doe@email.com",
+          postedDate: Date.now()
+        },
+        uploadImage: this.uploadImage
+        });
+      this.NewAdsCreated = true
     }
   }
 };

@@ -36,11 +36,14 @@ export let addAdvertisement = async (
   res: Response,
   next: NextFunction
 ) => {
-  const newAd = new AdvertisementModel(req.body);
-  newAd.image = req.file.filename;
-  const returnedAd = await newAd.save();
+  console.log('Creating new ads: ')
+  const newAd = new AdvertisementModel(req.body)
+  console.info(newAd)
+  const returnedAd = await newAd.save()
 
-  return res.status(201).send(returnedAd);
+  return res
+      .status(201)
+      .send(returnedAd);
 };
 
 export let updatead = async (
@@ -88,7 +91,8 @@ export let uploadFile = async (
   res: Response,
   next: NextFunction
 ) => {
-  console.log(req.file);
+
+  console.log(`Uploading image to server: ${req.file?.filename}`);
 
   return res.status(200).send();
 };

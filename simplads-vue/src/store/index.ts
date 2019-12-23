@@ -72,7 +72,9 @@ export default new Vuex.Store({
       commit("setAdsList", adsList);
     },
     async createNewAds({ commit }, ads) {
-      await new Ads().createNewAds(ads);
+      const adsService = new Ads();
+      await adsService.createNewAds(ads);
+      await adsService.uploadAds(ads);
       commit("addNewAds", ads);
     }
   },
