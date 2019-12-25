@@ -3,22 +3,25 @@ kind: Deployment
 metadata:
   name: {{ .Release.Name }}-zipkin
   labels:
-    {{- include "simplads-chart.labels" . | nindent 4 }}-zipkin
+    app: {{ .Release.Name }}-zipkin
+    chart: {{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Name }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      {{- include "simplads-chart.selectorLabels" . | nindent 6 }}-zipkin
+      app: {{ .Release.Name }}-zipkin
   template:
     metadata:
       labels:
-        {{- include "simplads-chart.selectorLabels" . | nindent 8 }}-zipkin
+        app: {{ .Release.Name }}-zipkin
+        release: {{ .Release.Name }}
     spec:
     {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
         {{- toYaml . | nindent 8 }}
     {{- end }}
-      serviceAccountName: {{ include "simplads-chart.serviceAccountName" . }}
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:

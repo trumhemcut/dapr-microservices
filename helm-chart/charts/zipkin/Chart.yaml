@@ -1,6 +1,6 @@
 apiVersion: v2
-name: simplads-chart
-description: SimplAds - a sample app using Dapr on Azure
+name: zipkin
+description: Zipkin Helm chart
 
 # A chart can be either an 'application' or a 'library' chart.
 #
@@ -18,21 +18,4 @@ version: 0.1.0
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application.
-appVersion: 0.1.0
-
-dependencies:
-  - name: mongodb
-    version: 7.4.6
-    repository: https://kubernetes-charts.storage.googleapis.com
-    condition: subcharts.enabled
-  - name: traefik
-    version: 1.82.3
-    repository: https://kubernetes-charts.storage.googleapis.com
-    condition: subcharts.enabled
-  - name: kafka
-    version: 0.20.7
-    repository: https://kubernetes-charts-incubator.storage.googleapis.com
-    condition: subcharts.enabled
-  - name: zipkin
-    version: 0.1.0
-    condition: subcharts.enabled
+appVersion: 1.16.0

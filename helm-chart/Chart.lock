@@ -5,5 +5,8 @@ dependencies:
 - name: traefik
   repository: https://kubernetes-charts.storage.googleapis.com
   version: 1.82.3
-digest: sha256:c27d91242d7fd00c526aab4a5ce2d9c888ecfb6b801b21adc629b624d23dc603
-generated: "2019-12-08T11:07:08.175713+07:00"
+- name: kafka
+  repository: https://kubernetes-charts-incubator.storage.googleapis.com
+  version: 0.20.7
+digest: sha256:2822b68e058fe6214ed6e551647089dcbcc8bd13ea054131b8d3cffcbd4579ef
+generated: "2019-12-25T15:00:29.3730353+07:00"

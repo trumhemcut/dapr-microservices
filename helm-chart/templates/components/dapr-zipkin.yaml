@@ -8,5 +8,5 @@ spec:
   - name: enabled
     value: "true"
   - name: exporterAddress
-    value: {{ printf "http://%s-zipkin.default.svc.cluster.local:9411/api/v2/spans" .Release.Name }}
+    value: {{ printf "http://%s-zipkin:9411/api/v2/spans" .Release.Name }}
     
