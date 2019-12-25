@@ -12,15 +12,16 @@ export class Ads {
   }
   async createNewAds(data: any) {
     console.log("create new ads...");
-    await axios.post("/advertisements", data.newAds);
+    return await axios.post("/advertisements", data.newAds);
   }
-  async uploadAds(data: any) {
+  async uploadAds(adId: any, uploadImage: any) {
     console.log("upload ads image ...");
     // TODO: this is temporarily fix while waiting for Dapr reply
     axios.defaults.baseURL = process.env.VUE_APP_BASE_URL_WITHOUT_DAPR;
 
     const formData = new FormData();
-    formData.append("file", data.uploadImage);
+    formData.append("file", uploadImage);
+    formData.append("adId", adId)
 
     await axios.post("/upload", formData);
   }

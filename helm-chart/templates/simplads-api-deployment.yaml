@@ -42,6 +42,9 @@ spec:
             - name: http
               containerPort: 8081
               protocol: TCP
+          volumeMounts:
+          - name: upload-data
+            mountPath: /usr/src/app/uploads
           # livenessProbe:
           #   httpGet:
           #     path: /
@@ -52,6 +55,10 @@ spec:
           #     port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+      volumes:
+      - name: upload-data
+        persistentVolumeClaim:
+          claimName: {{ .Release.Name }}-pvc
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
