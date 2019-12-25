@@ -93,6 +93,16 @@ export let uploadFile = async (
 ) => {
 
   console.log(`Uploading image to server: ${req.file?.filename}`);
+  console.log(`Updating item ${req.body.adId}`)
+  const adId = req.body.adId;
+
+  const ad = await AdvertisementModel.findById(adId);
+  if (!ad) {
+    return res.status(404).send();
+  }
+
+  ad.image = req.file.filename;
+  await ad.save();
 
   return res.status(200).send();
 };
