@@ -8,5 +8,8 @@ dependencies:
 - name: kafka
   repository: https://kubernetes-charts-incubator.storage.googleapis.com
   version: 0.20.7
-digest: sha256:2822b68e058fe6214ed6e551647089dcbcc8bd13ea054131b8d3cffcbd4579ef
-generated: "2019-12-25T15:00:29.3730353+07:00"
+- name: zipkin
+  repository: ""
+  version: 0.1.0
+digest: sha256:06846f0310d5f32677487b810516d74455333a39eb9a4f53dc0b4aa45bb32fb9
+generated: "2019-12-25T19:56:38.370991+07:00"

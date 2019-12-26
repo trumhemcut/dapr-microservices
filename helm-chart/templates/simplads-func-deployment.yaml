@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-func
+  labels:
+    {{- include "simplads-chart.labels" . | nindent 4 }}-func
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "simplads-chart.selectorLabels" . | nindent 6 }}-func
+  template:
+    metadata:
+      labels:
+        {{- include "simplads-chart.selectorLabels" . | nindent 8 }}-func
+      annotations:
+        dapr.io/enabled: "false"
+        dapr.io/id: {{ .Release.Name }}-func
+        dapr.io/port: "80"
+        dapr.io/config: "tracing"
+    spec:
+    {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+      serviceAccountName: {{ include "simplads-chart.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.simplads_func.repository }}:latest"
+          imagePullPolicy: {{ .Values.image.simplads_func.pullPolicy }}
+          env:
+          - name: MONGODB
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}-func
+                key: mongodb
+          ports:
+            - name: http
+              containerPort: 80
+              protocol: TCP
+          volumeMounts:
+          - name: upload-data
+            mountPath: /home/site/wwwroot/uploads
+          # livenessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
+          # readinessProbe:
+          #   httpGet:
+          #     path: /
+          #     port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      volumes:
+      - name: upload-data
+        persistentVolumeClaim:
+          claimName: {{ .Release.Name }}-pvc
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+    {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
+    {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+    {{- end }}
