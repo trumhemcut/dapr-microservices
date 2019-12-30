@@ -13,10 +13,11 @@
         </div>
 
         <vs-navbar-item index="0">
-          <a href="#">john.doe@email.com</a>
+          <a href="#">{{email}}</a>
         </vs-navbar-item>
         <vs-navbar-item index="2">
-          <a href="#">Logout</a>
+          <a href="#" v-if="!isAuthenticated" @click="$adal.login()">Login</a>
+          <a href="#" v-if="isAuthenticated" @click="$adal.logout()">Logout</a>
         </vs-navbar-item>
 
         <vs-spacer></vs-spacer>
@@ -29,7 +30,22 @@
     <router-view />
   </div>
 </template>
-
+<script>
+export default {
+  data() {
+    return {
+      email: '',
+      isAuthenticated: false
+    }
+  },
+  async created(){
+    this.isAuthenticated = this.$adal.isAuthenticated();
+    if (this.isAuthenticated) {
+      this.email = this.$adal.user.profile.email
+    }
+  }
+}
+</script>
 <style>
 #app {
   font-family: "MontserratThin", "Avenir", Helvetica, Arial, sans-serif;
