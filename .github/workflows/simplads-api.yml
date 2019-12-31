@@ -2,8 +2,6 @@ name: simplads-api
 
 on:
   push:
-    branches: 
-      - master
     paths: 
       - 'simplads-api/*'
 
