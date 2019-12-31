@@ -1,6 +1,9 @@
 name: simplads-vue
 
-on: [push]
+on:
+  push:
+    paths: 
+      - 'simplads-vue/*'
 
 jobs:
   build:
