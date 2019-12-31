@@ -1,0 +1,55 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{ .Release.Name }}-resize
+  labels:
+    app: {{ .Release.Name }}-resize
+spec:
+  selector:
+    app: {{ .Release.Name }}-resize
+  ports:
+    - protocol: TCP
+      port: 8888
+      targetPort: 3000
+  type: LoadBalancer
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-resize
+  labels:
+    app: {{ .Release.Name }}-resize
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-resize
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-resize
+      annotations:
+        dapr.io/enabled: "true"
+        dapr.io/id: {{ .Release.Name }}-resize
+        dapr.io/port: "3000"
+    spec:
+      containers:
+        - name: {{ .Release.Name }}-resize
+          image: trumhemcut/simplads_resize
+          ports:
+            - containerPort: 3000
+          volumeMounts:
+          - name: upload-data
+            mountPath: /app/uploads
+          imagePullPolicy: IfNotPresent
+          env:
+          - name: MONGODB
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}-resize
+                key: mongodb
+      volumes:
+      - name: upload-data
+        persistentVolumeClaim:
+          claimName: {{ .Release.Name }}-pvc

@@ -11,10 +11,15 @@ image:
   simplads_vue:
     repository: trumhemcut/simplads_vue
     pullPolicy: IfNotPresent
+  simplads_resize:
+    repository: trumhemcut/simplads_resize
+    pullPolicy: IfNotPresent
 
 configmap:
   simplads_api:
-    mongodb: simplads-mongodb  
+    mongodb: simplads-mongodb
+  simplads_resize:
+    mongodb: simplads-mongodb
 
 imagePullSecrets: []
 nameOverride: ""
@@ -39,15 +44,15 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  simplads_api:
-    type: LoadBalancer
-    port: 8081
   simplads_vue:
     type: ClusterIP
     port: 8080
-  simplads_zipkin:
-    type: ClusterIP
-    port: 9411
+  simplads_api:
+    type: LoadBalancer
+    port: 8081
+  simplads_func:
+    type: LoadBalancer
+    port: 8082
 
 ingress:
   enabled: false
@@ -109,4 +114,5 @@ traefik:
   dashboard:
     enabled: true
     domain: traefik.dapr.fun
-    
+kafka:
+  replicas: 1

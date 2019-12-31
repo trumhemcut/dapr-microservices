@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { AdvertisementModel } from "../schemas/advertisement";
+import * as axios from "axios";
 
 export let getAdvertisement = (
   req: Request,
@@ -36,14 +37,12 @@ export let addAdvertisement = async (
   res: Response,
   next: NextFunction
 ) => {
-  console.log('Creating new ads: ')
-  const newAd = new AdvertisementModel(req.body)
-  console.info(newAd)
-  const returnedAd = await newAd.save()
+  console.log("Creating new ads: ");
+  const newAd = new AdvertisementModel(req.body);
+  console.info(newAd);
+  const returnedAd = await newAd.save();
 
-  return res
-      .status(201)
-      .send(returnedAd);
+  return res.status(201).send(returnedAd);
 };
 
 export let updatead = async (
@@ -91,9 +90,8 @@ export let uploadFile = async (
   res: Response,
   next: NextFunction
 ) => {
-
   console.log(`Uploading image to server: ${req.file?.filename}`);
-  console.log(`Updating item ${req.body.adId}`)
+  console.log(`Updating item ${req.body.adId}`);
   const adId = req.body.adId;
 
   const ad = await AdvertisementModel.findById(adId);
@@ -103,6 +101,12 @@ export let uploadFile = async (
 
   ad.image = req.file.filename;
   await ad.save();
+
+  axios.default.post("http://localhost:3500/v1.0/bindings/sample-topic", {
+    data: {
+      fileName: req.file.filename
+    }
+  });
 
   return res.status(200).send();
 };
