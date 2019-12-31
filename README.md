@@ -10,7 +10,7 @@ Leverage the power of Dapr to build microservices application
 
 ### Step 1 - Pre-requisites
 
-- Kubernetes, it's ok to use Kubernetes on Docker for Win/Mac or Minikube for development environment.
+- Kubernetes, it's ok to use Kubernetes on Docker for Win/Mac or Minikube for development environment. Currently I've just tested on Docker for Win/Mac environment (with Kubernetes enabled). Minikue hasn't been tested yet!
 - [Helm 3.0](https://github.com/helm/helm/releases), no more Tiller. But please add the repo before we can install:
 - [Dapr CLI](https://github.com/dapr/cli), prefer latest version (e.g. 0.3.0)
 
