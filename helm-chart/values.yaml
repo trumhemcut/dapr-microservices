@@ -11,14 +11,14 @@ image:
   simplads_vue:
     repository: trumhemcut/simplads_vue
     pullPolicy: IfNotPresent
-  simplads_func:
-    repository: trumhemcut/simplads_func
+  simplads_resize:
+    repository: trumhemcut/simplads_resize
     pullPolicy: IfNotPresent
 
 configmap:
   simplads_api:
     mongodb: simplads-mongodb
-  simplads_func:
+  simplads_resize:
     mongodb: simplads-mongodb
 
 imagePullSecrets: []
