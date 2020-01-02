@@ -102,11 +102,36 @@ export let uploadFile = async (
   ad.image = req.file.filename;
   await ad.save();
 
-  axios.default.post("http://localhost:3500/v1.0/bindings/sample-topic", {
+  axios.default.post("http://localhost:3500/v1.0/bindings/ads-topic", {
     data: {
+      messageType: "ADS_CREATED",
       fileName: req.file.filename
     }
   });
 
   return res.status(200).send();
+};
+
+export let imageResized = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  console.log("SIMPLADS_API: Receiving new data:");
+  console.log(req.body);
+
+  if (req.body.messageType !== "IMAGE_RESIZED") return res.status(200).send();
+
+  console.log(`Updating the resized image state to MongoDB...`);
+  const adId = req.body.adId;
+
+  const ad = await AdvertisementModel.findById(adId);
+  if (!ad) {
+    return res.status(404).send();
+  }
+
+  ad.status = "RESIZED";
+  await ad.save();
+
+  return res.status(204).send(ad);
 };

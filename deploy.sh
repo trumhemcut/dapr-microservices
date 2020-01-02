@@ -23,7 +23,7 @@ cd simplads-api
 docker build -t trumhemcut/simplads_api .
 cd .. && cd simplads-vue
 docker build -t trumhemcut/simplads_vue .
-cd .. && cd simplads-func
-docker build -t trumhemcut/simplads_func .
+cd .. && cd simplads-resize
+docker build -t trumhemcut/simplads_resize .
 cd ..
 helm install simplads ./helm-chart

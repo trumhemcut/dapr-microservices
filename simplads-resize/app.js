@@ -4,13 +4,19 @@ const path = require("path");
 const fs = require("fs");
 const sharp = require("sharp");
 require("isomorphic-fetch");
+const axios = require("axios").default;
 
 const app = express();
 app.use(bodyParser.json());
 
 const port = 3000;
 
-app.post("/sample-topic", async (req, res) => {
+app.post("/ads-topic", async (req, res) => {
+  console.log("RESIZE_IMAGE: Receiving new data:");
+  console.log(req.body);
+
+  if (req.body.messageType !== "ADS_CREATED") return res.status(200).send();
+
   const fileName = req.body.fileName;
   const filePath = path.resolve("./uploads", fileName);
   const resizedFilePath = path.resolve("./uploads", `resized_${fileName}`);
@@ -20,6 +26,13 @@ app.post("/sample-topic", async (req, res) => {
     await sharp(buffer)
       .resize(undefined, 100)
       .toFile(resizedFilePath);
+
+    await axios.default.post("http://localhost:3500/v1.0/bindings/ads-topic", {
+      data: {
+        messageType: "IMAGE_RESIZED",
+        resizedFileName: resizedFilePath
+      }
+    });
 
     res.status(200).send();
   } else {
