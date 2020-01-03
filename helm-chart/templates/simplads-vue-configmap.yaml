@@ -4,3 +4,4 @@ metadata:
   name: {{ .Release.Name }}-vue
 data:
   baseUrl: {{ printf "http://api.dapr.fun/v1.0/invoke/%s-api/method/" .Release.Name }}
+  redirectUri: https://web.dapr.fun
