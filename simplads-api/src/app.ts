@@ -18,6 +18,7 @@ class App {
     this.expressApp = express();
     this.expressApp.use(bodyParser.json());
     this.expressApp.use(cors());
+    this.expressApp.use("/uploads", express.static("uploads"));
     this.userRoutes.routes(this.expressApp);
     this.orderRoutes.routes(this.expressApp);
     this.adRoutes.routes(this.expressApp);
