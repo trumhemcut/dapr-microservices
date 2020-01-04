@@ -18,7 +18,6 @@ export class AdvertisementRoute {
       .post(upload.single("file"), adController.addAdvertisement);
     app.route("/advertisements/:id").get(adController.getAdvertisement);
     app.route("/advertisements/:id").delete(adController.removead);
-    app.route("/ads-topic").post(adController.imageResized);
     app.route("/upload").post(upload.single("file"), adController.uploadFile);
   }
 }

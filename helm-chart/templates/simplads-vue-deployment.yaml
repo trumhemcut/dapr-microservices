@@ -33,6 +33,11 @@ spec:
               configMapKeyRef:
                 name: simplads-vue
                 key: baseUrl
+          - name: VUE_APP_DAPR_URL
+            valueFrom:
+              configMapKeyRef:
+                name: simplads-vue
+                key: daprUrl
           - name: VUE_APP_REDIRECT_URI
             valueFrom:
               configMapKeyRef:

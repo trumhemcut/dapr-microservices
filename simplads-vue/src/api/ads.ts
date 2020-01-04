@@ -3,7 +3,7 @@ import { Advertisement } from "../store/advertisement";
 
 export class Ads {
   constructor() {
-    axios.defaults.baseURL = process.env.VUE_APP_BASE_URL;
+    axios.defaults.baseURL = process.env.VUE_APP_DAPR_URL;
   }
   async getAllAds() {
     let result = await axios.get("/advertisements");
@@ -17,11 +17,11 @@ export class Ads {
   async uploadAds(adId: any, uploadImage: any) {
     console.log("upload ads image ...");
     // TODO: this is temporarily fix while waiting for Dapr reply
-    axios.defaults.baseURL = process.env.VUE_APP_BASE_URL_WITHOUT_DAPR;
+    axios.defaults.baseURL = process.env.VUE_APP_BASE_URL;
 
     const formData = new FormData();
     formData.append("file", uploadImage);
-    formData.append("adId", adId)
+    formData.append("adId", adId);
 
     await axios.post("/upload", formData);
   }

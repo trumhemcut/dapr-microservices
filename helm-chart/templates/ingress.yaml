@@ -3,21 +3,49 @@
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
-  name: {{ .Release.Name  }}-ingress
+  name: {{ .Release.Name  }}-ingress-api
   namespace: default
-  {{- with .Values.ingress.annotations }}
   annotations:
-    {{- toYaml . | nindent 4 }}
-  {{- end }}
+    kubernetes.io/ingress.class: traefik
+    traefik.ingress.kubernetes.io/rewrite-target: /
 spec:
   rules:
-  {{- range .Values.ingress.hosts }}
-    - host: {{ .host | quote }}
+    - host: web.dapr.fun
       http:
         paths:
-        {{- range .paths }}
+          - path: /api
+            backend: 
+              serviceName: {{ .Release.Name  }}-api
+              servicePort: 8081
+          - path: /dapr
+            backend: 
+              serviceName: {{ .Release.Name  }}-api-dapr
+              servicePort: 80
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: {{ .Release.Name  }}-ingress
+  namespace: default
+  annotations:
+    kubernetes.io/ingress.class: traefik
+spec:
+  rules:
+    - host: web.dapr.fun
+      http:
+        paths:
           - backend: 
-              serviceName: {{ printf "%s-%s" $root.Release.Name .serviceName}}
-              servicePort: {{ .servicePort }}
-        {{- end }}
-  {{- end }}
+              serviceName: {{ .Release.Name  }}-vue
+              servicePort: 8080
+    - host: zipkin.dapr.fun
+      http:
+        paths:
+          - backend: 
+              serviceName: {{ .Release.Name  }}-zipkin
+              servicePort: 9411
+    - host: dashboard.dapr.fun
+      http:
+        paths:
+          - backend: 
+              serviceName: {{ .Release.Name  }}-dapr-dashboard
+              servicePort: 8080

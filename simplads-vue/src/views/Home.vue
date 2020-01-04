@@ -35,10 +35,7 @@
           </vs-td>
           <vs-td :data="data[indextr].image">
             <img
-              :src="
-                'http://api.dapr.fun:8081/uploads/resized_' +
-                  data[indextr].image
-              "
+              :src="`https://${baseUrl}/uploads/resized_${data[indextr].image}`"
             />
           </vs-td>
           <vs-td :data="data[indextr].status">
@@ -61,6 +58,7 @@ import { mapState, mapActions } from "vuex";
 
 export default {
   data: () => ({
+    baseUrl: process.env.VUE_APP_BASE_URL,
     select1: 3,
     options1: [
       { text: "IT", value: 0 },

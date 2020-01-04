@@ -56,26 +56,26 @@ service:
 
 ingress:
   enabled: false
-  annotations:
-    kubernetes.io/ingress.class: traefik
-  # kubernetes.io/tls-acme: "true"
-  hosts:
-    - host: web.dapr.fun
-      paths:
-        - serviceName: vue
-          servicePort: 8080
-    - host: api.dapr.fun
-      paths:
-        - serviceName: api-dapr
-          servicePort: 80
-    - host: zipkin.dapr.fun
-      paths:
-        - serviceName: zipkin
-          servicePort: 9411
-    - host: dashboard.dapr.fun
-      paths:
-        - serviceName: dapr-dashboard
-          servicePort: 8080
+#   annotations:
+#     kubernetes.io/ingress.class: traefik
+#   # kubernetes.io/tls-acme: "true"
+#   hosts:
+#     - host: web.dapr.fun
+#       paths:
+#         - serviceName: vue
+#           servicePort: 8080
+#     - host: api.dapr.fun
+#       paths:
+#         - serviceName: api-dapr
+#           servicePort: 80
+#     - host: zipkin.dapr.fun
+#       paths:
+#         - serviceName: zipkin
+#           servicePort: 9411
+#     - host: dashboard.dapr.fun
+#       paths:
+#         - serviceName: dapr-dashboard
+#           servicePort: 8080
 
   tls: []
   #  - secretName: chart-example-tls
@@ -114,5 +114,9 @@ traefik:
   dashboard:
     enabled: true
     domain: traefik.dapr.fun
+  ssl:
+    enabled: true
+    enforced: true
+    generateTLS: true
 kafka:
   replicas: 1

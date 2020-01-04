@@ -1,6 +1,6 @@
 # dapr microservices
 
-![Build Status](https://github.com/trumhemcut/dapr-microservices/workflows/simplads-api/badge.svg) ![Build Status](https://github.com/trumhemcut/dapr-microservices/workflows/simplads-vue/badge.svg)
+![Build Status](https://github.com/trumhemcut/dapr-microservices/workflows/simplads-api/badge.svg) ![Build Status](https://github.com/trumhemcut/dapr-microservices/workflows/simplads-vue/badge.svg) ![Build Status](https://github.com/trumhemcut/dapr-microservices/workflows/simplads-resize/badge.svg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Follow on Twitter](https://img.shields.io/twitter/follow/trumhemcut.svg?style=social&logo=twitter)](https://twitter.com/intent/follow?screen_name=trumhemcut)
 
@@ -39,18 +39,18 @@ Since the SimplAds uses Traefik as its main ingress, and using hostnames as the 
 If you're using Mac, add the line below to this file _/etc/hosts_. If you're using Windows, add the line below to this file _C:\Windows\System32\drivers\hosts_
 
 ```
-127.0.0.1   dapr.fun dashboard.dapr.fun web.dapr.fun api.dapr.fun zipkin.dapr.fun traefik.dapr.fun
+127.0.0.1   traefik.dapr.fun dashboard.dapr.fun web.dapr.fun zipkin.dapr.fun
 ```
 
 ## Features
 
 After finishing all above steps (it may takes several minutes), you can browse following Urls:
 
-- Web App: http://web.dapr.fun
-- Distrubuted tracing: http://zipkin.dapr.fun
-- Traefik Ingress: http://traefik.dapr.fun
-- Dapr Dashboard: http://dashboard.dapr.fun
-- Dapr API endpoint: http://api.dapr.fun
+- Web App: https://web.dapr.fun
+- Distrubuted tracing: https://zipkin.dapr.fun
+- Traefik Ingress: https://traefik.dapr.fun
+- Dapr Dashboard: https://dashboard.dapr.fun
+- Dapr API endpoint: https://web.dapr.fun/dapr
 
 ## Architecture
 

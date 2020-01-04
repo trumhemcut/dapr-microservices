@@ -3,5 +3,6 @@ kind: ConfigMap
 metadata:
   name: {{ .Release.Name }}-vue
 data:
-  baseUrl: {{ printf "http://api.dapr.fun/v1.0/invoke/%s-api/method/" .Release.Name }}
+  daprUrl: {{ printf "https://web.dapr.fun/dapr/v1.0/invoke/%s-api/method/" .Release.Name }}
   redirectUri: https://web.dapr.fun
+  baseUrl: https://web.dapr.fun/api
