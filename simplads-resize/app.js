@@ -33,7 +33,9 @@ app.post("/ads-topic", async (req, res) => {
         resizedFileName: resizedFilePath
       }
     });
-
+    
+    console.log("Finish");
+    
     res.status(200).send();
   } else {
     res.status(500).send();
