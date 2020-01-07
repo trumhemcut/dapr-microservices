@@ -33,6 +33,7 @@ spec:
         dapr.io/enabled: "true"
         dapr.io/id: {{ .Release.Name }}-resize
         dapr.io/port: "3000"
+        dapr.io/config: "tracing"
     spec:
       containers:
         - name: {{ .Release.Name }}-resize
