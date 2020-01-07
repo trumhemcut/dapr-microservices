@@ -2,14 +2,17 @@ name: simplads-api
 
 on:
   push:
-    paths:
-      - "simplads-api/*"
+  #  paths:
+  #    - "simplads-api/*"
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
+      - run: |
+          git fetch --tags
+          git branch --create-reflog master origin/master
       - name: Install GitVersion
         uses: gittools/actions/setup-gitversion@v0.3
         with:
