@@ -11,8 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - run: |
-          git fetch --tags
-          git branch --create-reflog master origin/master
+          git fetch --unshallow
       - name: Install GitVersion
         uses: gittools/actions/setup-gitversion@v0.3
         with:
