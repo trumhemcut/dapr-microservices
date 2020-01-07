@@ -10,14 +10,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - name: Get Git Version
-        uses: docker://gittools/gitversion:5.1.4-linux-netcoreapp2.1
+      - name: Install GitVersion
+        uses: gittools/actions/setup-gitversion@v0.3
         with:
-          args: /github/workspace /nofetch /exec /bin/sh /execargs "-c \"echo $GitVersion_FullSemVer > /github/workspace/version.txt\""
+          versionSpec: '5.1.4'
+      - name: Use GitVersion
+        id: gitversion # step id used as reference for output values
+        uses: gittools/actions/execute-gitversion@v0.3        
       - name: Publish to Registry
         uses: elgohr/Publish-Docker-Github-Action@master
         with:
-          name: trumhemcut/simplads_api:$(cat /github/workspace/version.txt)
+          name: trumhemcut/simplads_api:${{ steps.gitversion.outputs.fullSemVer }}
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           workdir: ./simplads-api
