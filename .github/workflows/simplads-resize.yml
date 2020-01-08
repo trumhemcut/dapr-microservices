@@ -1,11 +1,9 @@
-name: simplads-build
+name: simplads-resize
 
 on:
   push:
     paths:
-      - "simplads-api/*"
       - "simplads-resize/*"
-      - "simplads-vue/*"
       - ".github/workflows/*"
 
 jobs:
@@ -14,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - run: echo github.event.path
+      - run: echo ${{ github.event.path }}
       - run: |
           git fetch --unshallow
       # Get next version of Docker images
@@ -25,27 +23,18 @@ jobs:
       - name: Use GitVersion
         id: gitversion
         uses: gittools/actions/execute-gitversion@v0.3
-      # Build SimplAds API
-      - name: Publish SimplAds API to Docker Hub
-        uses: elgohr/Publish-Docker-Github-Action@master
-        with:
-          name: trumhemcut/simplads_api:${{ steps.gitversion.outputs.fullSemVer }}
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-          workdir: ./simplads-api
-      # Build SimplAds Vue
-      - name: Publish SimplAds Vue to Docker Hub
-        uses: elgohr/Publish-Docker-Github-Action@master
-        with:
-          name: trumhemcut/simplads_vue:${{ steps.gitversion.outputs.fullSemVer }}
-          username: ${{ secrets.DOCKER_USERNAME }}
-          password: ${{ secrets.DOCKER_PASSWORD }}
-          workdir: ./simplads-vue
       # Build SimplAds Resize service
       - name: Publish SimplAds Resize service to Docker Hub
         uses: elgohr/Publish-Docker-Github-Action@master
         with:
           name: trumhemcut/simplads_resize:${{ steps.gitversion.outputs.fullSemVer }}
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          workdir: ./simplads-resize
+      - name: Publish SimplAds Resize service to Docker Hub
+        uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          name: trumhemcut/simplads_resize
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           workdir: ./simplads-resize

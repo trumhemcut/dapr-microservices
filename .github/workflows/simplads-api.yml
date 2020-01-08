@@ -1,0 +1,40 @@
+name: simplads-api
+
+on:
+  push:
+    paths:
+      - "simplads-api/*"
+      - ".github/workflows/*"
+
+jobs:
+  gitversion:
+    name: prepare git version
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - run: echo ${{ github.event.path }}
+      - run: |
+          git fetch --unshallow
+      # Get next version of Docker images
+      - name: Install GitVersion
+        uses: gittools/actions/setup-gitversion@v0.3
+        with:
+          versionSpec: "5.1.3"
+      - name: Use GitVersion
+        id: gitversion
+        uses: gittools/actions/execute-gitversion@v0.3
+      # Build SimplAds API
+      - name: Publish SimplAds API to Docker Hub
+        uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          name: trumhemcut/simplads_api:${{ steps.gitversion.outputs.fullSemVer }}
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          workdir: ./simplads-api
+      - name: Publish SimplAds API to Docker Hub
+        uses: elgohr/Publish-Docker-Github-Action@master
+        with:
+          name: trumhemcut/simplads_api
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+          workdir: ./simplads-api
