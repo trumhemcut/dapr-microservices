@@ -34,9 +34,7 @@
             {{ data[indextr].price }}
           </vs-td>
           <vs-td :data="data[indextr].image">
-            <img
-              :src="`https://${baseUrl}/uploads/resized_${data[indextr].image}`"
-            />
+            <img :src="`${baseUrl}/uploads/resized_${data[indextr].image}`" />
           </vs-td>
           <vs-td :data="data[indextr].status">
             {{ data[indextr].status }}
