@@ -17,6 +17,7 @@ jobs:
       - run: echo github.event.path
       - run: |
           git fetch --unshallow
+      # Get next version of Docker images
       - name: Install GitVersion
         uses: gittools/actions/setup-gitversion@v0.3
         with:
@@ -24,30 +25,27 @@ jobs:
       - name: Use GitVersion
         id: gitversion
         uses: gittools/actions/execute-gitversion@v0.3
-  build:
-    name: build simplads services
-    runs-on: ubuntu-latest
-    needs: gitversion
-    steps:
-      - uses: actions/checkout@master
+      # Build SimplAds API
       - name: Publish SimplAds API to Docker Hub
         uses: elgohr/Publish-Docker-Github-Action@master
         with:
-          name: trumhemcut/simplads_api:${{ jobs.gitversion.steps.gitversion.outputs.fullSemVer }}
+          name: trumhemcut/simplads_api:${{ steps.gitversion.outputs.fullSemVer }}
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           workdir: ./simplads-api
+      # Build SimplAds Vue
       - name: Publish SimplAds Vue to Docker Hub
         uses: elgohr/Publish-Docker-Github-Action@master
         with:
-          name: trumhemcut/simplads_vue:${{ jobs.gitversion.steps.gitversion.outputs.fullSemVer }}
+          name: trumhemcut/simplads_vue:${{ steps.gitversion.outputs.fullSemVer }}
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           workdir: ./simplads-vue
+      # Build SimplAds Resize service
       - name: Publish SimplAds Resize service to Docker Hub
         uses: elgohr/Publish-Docker-Github-Action@master
         with:
-          name: trumhemcut/simplads_resize:${{ jobs.gitversion.steps.gitversion.outputs.fullSemVer }}
+          name: trumhemcut/simplads_resize:${{ steps.gitversion.outputs.fullSemVer }}
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
           workdir: ./simplads-resize
