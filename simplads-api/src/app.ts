@@ -5,12 +5,14 @@ import * as cors from "cors";
 import { OrderRoute } from "./routes/order";
 import { UserRoute } from "./routes/user";
 import { AdvertisementRoute } from "./routes/advertisement";
+import { HealthCheckRoute } from "./routes/healthcheck";
 
 class App {
   public expressApp: express.Application;
   public userRoutes: UserRoute = new UserRoute();
   public orderRoutes: OrderRoute = new OrderRoute();
   public adRoutes: AdvertisementRoute = new AdvertisementRoute();
+  public heathCheckRoutes: HealthCheckRoute = new HealthCheckRoute();
   public mongoUrl: string = `mongodb://${process.env.MONGODB ||
     "localhost"}/adsdb`;
 
@@ -22,6 +24,7 @@ class App {
     this.userRoutes.routes(this.expressApp);
     this.orderRoutes.routes(this.expressApp);
     this.adRoutes.routes(this.expressApp);
+    this.heathCheckRoutes.routes(this.expressApp);
   }
 
   public async mongoSetup() {
