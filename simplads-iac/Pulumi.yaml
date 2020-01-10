@@ -1,0 +1,3 @@
+name: dapr-azure
+runtime: nodejs
+description: Automate SimplAds infrastructure using Pulumi
