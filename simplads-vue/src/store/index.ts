@@ -56,7 +56,9 @@ export default new Vuex.Store({
         postedBy: "john.doe@email.com",
         postedDate: "July 9, 2019"
       }
-    ]
+    ],
+    email: "",
+    isAuthenticated: false
   },
   mutations: {
     setAdsList(state, adsList) {
@@ -64,6 +66,10 @@ export default new Vuex.Store({
     },
     addNewAds(state, newAds) {
       state.advertisements.push(newAds);
+    },
+    setAuthStatus(state, authStatus) {
+      state.email = authStatus.email;
+      state.isAuthenticated = authStatus.isAuthenticated;
     }
   },
   actions: {
