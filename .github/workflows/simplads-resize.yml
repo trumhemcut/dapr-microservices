@@ -2,6 +2,14 @@ name: simplads-resize
 
 on:
   push:
+    branches:
+      - master
+    paths:
+      - "simplads-resize/*"
+      - ".github/workflows/*"
+  pull_request:
+    branches:
+      - master
     paths:
       - "simplads-resize/*"
       - ".github/workflows/*"

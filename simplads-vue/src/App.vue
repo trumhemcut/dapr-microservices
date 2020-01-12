@@ -13,7 +13,7 @@
         </div>
 
         <vs-navbar-item index="0">
-          <a href="#">{{email}}</a>
+          <a href="#" v-if="isAuthenticated">{{ email }}</a>
         </vs-navbar-item>
         <vs-navbar-item index="2">
           <a href="#" v-if="!isAuthenticated" @click="$adal.login()">Login</a>
@@ -31,20 +31,28 @@
   </div>
 </template>
 <script>
+import { mapState, mapMutations } from "vuex";
 export default {
   data() {
     return {
-      email: '',
-      isAuthenticated: false
-    }
+      // email: ""
+      // isAuthenticated: false
+    };
   },
-  async created(){
-    this.isAuthenticated = this.$adal.isAuthenticated();
-    if (this.isAuthenticated) {
-      this.email = this.$adal.user.profile.email
-    }
+  computed: {
+    ...mapState(["email", "isAuthenticated"])
+  },
+  methods: {
+    ...mapMutations(["setAuthStatus"])
+  },
+  async created() {
+    let authenticated = this.$adal.isAuthenticated();
+    this.setAuthStatus({
+      email: authenticated ? this.$adal.user.profile.email : "unknown user",
+      isAuthenticated: authenticated
+    });
   }
-}
+};
 </script>
 <style>
 #app {

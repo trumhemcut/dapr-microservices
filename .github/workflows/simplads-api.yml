@@ -2,6 +2,14 @@ name: simplads-api
 
 on:
   push:
+    branches:
+      - master
+    paths:
+      - "simplads-api/*"
+      - ".github/workflows/*"
+  pull_request:
+    branches:
+      - master
     paths:
       - "simplads-api/*"
       - ".github/workflows/*"

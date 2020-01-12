@@ -13,10 +13,7 @@
     </vs-navbar>
     <vs-row style="padding-top:20px;padding-left:10px;" vs-w="6">
       <vs-col vs-type="flex" vs-w="12">
-        <vs-alert
-         :active.sync="NewAdsCreated"
-        closable
-        close-icon="cancel">
+        <vs-alert :active.sync="NewAdsCreated" closable close-icon="cancel">
           Created new ads successfully!
         </vs-alert>
       </vs-col>
@@ -62,7 +59,9 @@
       <vs-col vs-type="flex" vs-w="12">
         <vs-row>
           <vs-col vs-w="2"><span>Status</span></vs-col>
-          <vs-col vs-w="10"><vs-input disabled  class="inputx" size="default" v-model="state"/></vs-col>
+          <vs-col vs-w="10"
+            ><vs-input disabled class="inputx" size="default" v-model="state"
+          /></vs-col>
         </vs-row>
       </vs-col>
       <vs-col vs-type="flex" vs-w="12">
@@ -115,7 +114,7 @@ export default {
     NewAdsCreated: false
   }),
   computed: {
-    ...mapState(["advertisements"])
+    ...mapState(["advertisements", "email", "isAuthenticated"])
   },
   methods: {
     ...mapActions(["createNewAds"]),
@@ -134,12 +133,12 @@ export default {
           )[0].text,
           price: this.price,
           status: "Pending",
-          postedBy: "john.doe@email.com",
+          postedBy: this.email,
           postedDate: Date.now()
         },
         uploadImage: this.uploadImage
-        });
-      this.NewAdsCreated = true
+      });
+      this.NewAdsCreated = true;
     }
   }
 };

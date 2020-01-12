@@ -2,6 +2,14 @@ name: simplads-vue
 
 on:
   push:
+    branches:
+      - master
+    paths:
+      - "simplads-vue/*"
+      - ".github/workflows/*"
+  pull_request:
+    branches:
+      - master
     paths:
       - "simplads-vue/*"
       - ".github/workflows/*"
